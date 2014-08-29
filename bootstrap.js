@@ -35,6 +35,12 @@ function startup(data) {
 		Speak = DLL.declare("Speak", ctypes.default_abi, ctypes.int32_t, ctypes.jschar.ptr, ctypes.unsigned_long);
 		
 		Speak("Welcome to Firefox", SPF_DEFAULT );
+		var check = {value: false};                  // default the checkbox to false
+		var input = {value: "Bob"};                  // default the edit field to Bob
+		var result = true;
+		while (result = Services.prompt.prompt(null, "Title", "What is your name?", input, null, check)) {
+			Speak(input.value, SPF_DEFAULT );
+		}
 		
 	} catch(e) {
 		Components.utils.reportError(e);
